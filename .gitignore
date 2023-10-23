@@ -1,1 +1,4 @@
-build\*
+build/*
+.vs/Projet_Rendu_RopeMan/v16
+.vs/ProjectSettings.json
+.vs/slnx.sqlite
