@@ -28,6 +28,7 @@ public:
 	void gui();
 
 	//In public attribute to make it easier
+	float m_mass;//Mass of player
 	vec3 p;//pos
 	vec3 v;//velocity
 	vec3 a;//acceleration
@@ -35,7 +36,7 @@ public:
 	float m_radius;//PLayer is a modeled as a sphere (for collision detextion, rope throw offset)
 private:
 	
-	float m_mass;//Mass of player
+
 	float m_ground_friction;//f_g = m_ground_friction in direction opposing acceleration if on ground
 	float m_fluid_friction;// f_f = m_fluid_friction * velocity in direction opposing acceleration
 	float m_bounce_coef;//When hitting a platform, "wall" component of speed is reversed with that factor 

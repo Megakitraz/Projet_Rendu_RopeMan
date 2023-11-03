@@ -8,7 +8,7 @@ KeyMapping PLAYERS_MAPPING_QWERTY =
 Player::Player()
 {
 	m_radius = 1.0f;//meter
-	m_mass = 1.0f;
+	//m_mass = 1.0f;
 	m_ground_friction = 0.1f;
 	m_fluid_friction = 0.05f;
 	m_bounce_coef = 0.5f;

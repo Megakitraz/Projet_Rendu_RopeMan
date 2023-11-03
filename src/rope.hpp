@@ -13,7 +13,7 @@ public:
 	//~Rope();
 	void compute_p_shading();
 	void compute_tangents();
-	void compute_rope_physics();
+	void compute_rope_physics(float delta_time, float gravity);
 
 	static void gui();
 
@@ -28,7 +28,9 @@ private:
 	bool is_head_bound_to_platform;
 	bool is_tail_bound_to_player;
 	bool is_left_hand;
-
+	static float segment_length; //longueur d'un segment 
+	static float segment_mass;   //masse d'un noeud entre deux segment
+	static float segment_k;		 //constante de raideur de chaque segment
 	std::uint32_t m_control_point_count;
 	
 	int m_id;

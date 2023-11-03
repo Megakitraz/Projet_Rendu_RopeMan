@@ -25,7 +25,8 @@ public:
 	void draw_environment();
 	void draw_ropes();
 	void gui(ApplicationUboDataStructure& app_ubo);
-
+	float m_gravity_amplitude;//in direction -y
+	float m_delta_t_s;//simulation time-step in second
 	Player m_player;
 
 private:
@@ -54,9 +55,6 @@ private:
 
 	float m_lava_altitude;//in Y dimension
 	float m_lava_speed;
-
-	float m_gravity_amplitude;//in direction -y
-	float m_delta_t_s;//simulation time-step in second
 
 	//Platforms
 	vec4 m_platform_cell_length;//.x:cell_length.x, .y:cell_length.y, .z:cell_length.z,  .w: empty_likelyhood
