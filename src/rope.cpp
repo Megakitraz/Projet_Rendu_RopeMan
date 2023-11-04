@@ -74,8 +74,9 @@ void Rope::compute_rope_physics(float delta_time, float gravity){
 	float former_segment_delta = former_segment_length - segment_length;
 	vec3 former_force_direction = normalize(p[m_control_point_count-2]-p[m_control_point_count-1]);
 	if(is_tail_bound_to_player){
-		a[m_control_point_count-1] = gravity*vec3(0,-1, 0) 
-		+ segment_k*former_segment_delta*former_force_direction/(segment_mass+ m_player.m_mass);
+		m_player.AddAcceleration(segment_k * former_segment_delta * former_force_direction / (segment_mass + m_player.m_mass));
+		p[m_control_point_count - 1];
+		
 	}
 	else{
 		a[m_control_point_count-1] = gravity*vec3(0,-1, 0) 

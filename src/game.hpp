@@ -20,6 +20,8 @@ public:
 	void write_ropes_data_to_vbos();
 	void write_params_to_application_struct(ApplicationUboDataStructure& app_ubo);
 
+	void ropes_physics();
+
 	void draw_lava();
 	void draw_platforms();
 	void draw_environment();
