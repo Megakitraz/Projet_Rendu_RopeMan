@@ -25,6 +25,8 @@ layout(binding = UBO_APPLICATION_BINDING, std140) uniform UBO_APPLICATION
     vec4 right_rope_light; //.xyz: pos, .w: intensity
 };
 
+in vec3 dir_ws;
+
 void main() 
 {
     //platform Raymarcher to put here
