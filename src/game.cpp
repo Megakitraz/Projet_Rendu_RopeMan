@@ -82,6 +82,13 @@ void Game::write_ropes_data_to_vbos()
 	}
 }
 
+void Game::ropes_physics()
+{
+	for (int i = 0; i < m_rope_bank_size; i++)
+	{
+		m_rope_bank[i].compute_rope_physics(ContextHelper::time_frame_s, m_gravity_amplitude);
+	}
+}
 
 
 void Game::write_params_to_application_struct(ApplicationUboDataStructure& app_ubo)
