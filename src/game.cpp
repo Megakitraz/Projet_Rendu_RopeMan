@@ -17,7 +17,9 @@ Game::Game()
 	m_rope_bank_pos_VBO.allocate(4);//Will be re-allocated
 	m_rope_bank_tan_VBO.allocate(4);
 
-
+	m_platform_cell_length = vec4(200.0f, 50.0f, 200.0f,0.2f);
+	m_platform_cell_offset = vec4(10.0f,10.0f, 10.0f, 0.2f);
+	m_platform_length = vec4(10.0f, 40.0f, 5.0f, 20.0f);
 	init_game();
 }
 
@@ -92,6 +94,9 @@ void Game::write_params_to_application_struct(ApplicationUboDataStructure& app_u
 	*/
 	app_ubo.rope_color.w = 0.1f;
 	app_ubo.lava_params.x = m_lava_altitude;
+	app_ubo.platform_cell_length = m_platform_cell_length;
+	app_ubo.platform_cell_offset = m_platform_cell_offset;
+	app_ubo.platform_length = m_platform_length;
 }
 
 
@@ -163,6 +168,23 @@ void Game::gui(ApplicationUboDataStructure& app_ubo)
 		ImGui::SliderFloat("Gravity amplitude", &(m_gravity_amplitude), 0.1f, 10.0f);
 		ImGui::SliderFloat("Delta time (sec)", &(m_delta_t_s), 0.001f, 0.010f);
 
+		ImGui::TreePop();
+	}
+	if (ImGui::TreeNode("Platforms "))
+	{
+		ImGui::SliderFloat("Cell length X", &(m_platform_cell_length.x), 50.0f, 500.0f);
+		ImGui::SliderFloat("Cell length Y", &(m_platform_cell_length.y), 50.0f, 500.0f);
+		ImGui::SliderFloat("Cell length Z", &(m_platform_cell_length.z), 50.0f, 500.0f);
+		ImGui::SliderFloat("Empty likelihood", &(m_platform_cell_length.w), 0.0f, 1.0f);
+
+		ImGui::SliderFloat("Offset cell length X", &(m_platform_cell_offset.x), 5.0f, 20.0f);
+		ImGui::SliderFloat("Offset cell length Y", &(m_platform_cell_offset.y), 5.0f, 20.0f);
+		ImGui::SliderFloat("Offset cell length Z", &(m_platform_cell_offset.z), 5.0f, 20.0f);
+
+		ImGui::SliderFloat("Min length", &(m_platform_length.x), 0.0f, 200.0f);
+		ImGui::SliderFloat("Max length", &(m_platform_length.y), 0.0f, 200.0f);
+		ImGui::SliderFloat("Min width", &(m_platform_length.z), 0.0f, 200.0f);
+		ImGui::SliderFloat("Max width", &(m_platform_length.w), 0.0f, 200.0f);
 		ImGui::TreePop();
 	}
 }
