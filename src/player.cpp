@@ -92,28 +92,28 @@ void Player::poll_keys_mouse()//Incomplete function
 	}
 
 	m_theta += delta_mouse.x * m_mouse_radians_per_pixel;
-	m_phi = glm::clamp(m_phi + delta_mouse.y * m_mouse_radians_per_pixel, -3.13f * 0.5f, 3.13f * 0.5f);
+	m_phi = glm::clamp(m_phi  - delta_mouse.y * m_mouse_radians_per_pixel, -3.13f * 0.5f, 3.13f * 0.5f);
 
 
 	if (glfwGetKey(ContextHelper::window, GLFW_KEY_W) == GLFW_PRESS)
 		{
-			v.x += (m_speed_unit_sec * m_forward).x;
-			v.z += (m_speed_unit_sec * m_forward).z;
+			v.x += (m_speed_unit_sec * m_forward).x * ContextHelper::time_frame_s;
+			v.z += (m_speed_unit_sec * m_forward).z * ContextHelper::time_frame_s;
 		}
 	if (glfwGetKey(ContextHelper::window, GLFW_KEY_S) == GLFW_PRESS)
 		{
-			v.x -= (m_speed_unit_sec * m_forward).x;
-			v.z -= (m_speed_unit_sec * m_forward).z;
+			v.x -= (m_speed_unit_sec * m_forward).x * ContextHelper::time_frame_s;
+			v.z -= (m_speed_unit_sec * m_forward).z * ContextHelper::time_frame_s;
 		}
 	if (glfwGetKey(ContextHelper::window, GLFW_KEY_A) == GLFW_PRESS)
 		{
-			v.x -= (m_speed_unit_sec * m_right).x;
-			v.z -= (m_speed_unit_sec * m_right).z;
+			v.x -= (m_speed_unit_sec * m_right).x * ContextHelper::time_frame_s;
+			v.z -= (m_speed_unit_sec * m_right).z * ContextHelper::time_frame_s;
 		}
 	if (glfwGetKey(ContextHelper::window, GLFW_KEY_D) == GLFW_PRESS)
 		{
-			v.x += (m_speed_unit_sec * m_right).x;
-			v.z += (m_speed_unit_sec * m_right).z;
+			v.x += (m_speed_unit_sec * m_right).x * ContextHelper::time_frame_s;
+			v.z += (m_speed_unit_sec * m_right).z * ContextHelper::time_frame_s;
 		}
 
 	build_basis();
@@ -122,7 +122,7 @@ void Player::poll_keys_mouse()//Incomplete function
 void Player::Move()
 {
 	a -= gravityStrength * m_up;
-	v += a * ContextHelper::time_frame_s;
+	v += a * ContextHelper::time_frame_s - v * m_ground_friction * ContextHelper::time_frame_s;
 	p += v * ContextHelper::time_frame_s;
 	a = vec3(0.0f); // a = 0
 
