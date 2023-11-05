@@ -17,23 +17,6 @@ struct KeyMapping {
 
 extern KeyMapping PLAYERS_MAPPING_QWERTY;
 
-class ProjectionMatrix {
-
-public:
-	ProjectionMatrix();
-	void set_viewport_resolution(glm::uvec2 res);
-	void set_perspective(float fov_y_degree, float near, float far);
-	void set_ortho_centered(float size_y, float near, float far);
-
-	glm::mat4 m_proj;
-
-private:
-	float m_ratio_x_over_y;
-	glm::uvec2 m_resolution;
-	bool m_is_perspective;
-	CacheCameraParams m_params;
-
-};
 
 class Player {
 
@@ -48,7 +31,7 @@ public:
 	
 
 	//In public attribute to make it easier
-	static float m_mass;//Mass of player
+	float m_mass;//Mass of player
 	vec3 p;//pos
 	vec3 v;//velocity
 	vec3 a;//acceleration

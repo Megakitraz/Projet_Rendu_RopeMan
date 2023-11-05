@@ -3,59 +3,7 @@
 KeyMapping PLAYERS_MAPPING_QWERTY = 
 	{GLFW_KEY_LEFT,GLFW_KEY_RIGHT,GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_SPACE};
 
-ProjectionMatrix::ProjectionMatrix()
-{
-	m_ratio_x_over_y = -1.0f;
-	m_is_perspective = true;
-	m_resolution = glm::uvec2(0);
-	m_params = { 0.0f };
-	m_proj = glm::mat4(0.0f);
-}
 
-void ProjectionMatrix::set_viewport_resolution(glm::uvec2 res)
-{
-	if (res.x == 0 || res.y == 0)
-		return;
-	if (res.x != m_resolution.x || res.y != m_resolution.y || m_ratio_x_over_y == -1.0f)
-	{
-		if (m_ratio_x_over_y != -1.0f)
-		{
-			m_resolution = res;
-			m_ratio_x_over_y = (float)(res.x) / (float)(res.y);
-			if (m_is_perspective)
-				set_perspective(m_params.fov_y_degree, m_params.z_near, m_params.z_far);
-			else
-				set_ortho_centered(m_params.size_y, m_params.z_near, m_params.z_far);
-
-		}
-		else
-		{
-			m_resolution = res;
-			m_ratio_x_over_y = (float)(res.x) / (float)(res.y);
-		}
-	}
-}
-
-void ProjectionMatrix::set_perspective(float fov_y_degree, float near, float far)
-{
-	m_is_perspective = true;
-	m_params.fov_y_degree = fov_y_degree;
-	m_params.z_near = near;
-	m_params.z_far = far;
-
-	m_proj = glm::perspective(glm::radians(fov_y_degree), m_ratio_x_over_y, near, far);
-
-}
-
-void ProjectionMatrix::set_ortho_centered(float size_y, float near, float far)
-{
-	m_is_perspective = false;
-	m_params.size_y = size_y;
-	m_params.z_near = near;
-	m_params.z_far = far;
-	m_proj = glm::ortho(-size_y * m_ratio_x_over_y, size_y * m_ratio_x_over_y, -size_y, size_y, near, far);
-
-}
 
 
 
