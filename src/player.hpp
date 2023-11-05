@@ -28,6 +28,9 @@ public:
 	void gui();
 	void Move();
 	void AddAcceleration(vec3 acc);
+
+	void set_camera(const glm::vec3 position, float theta, float phi);
+	void set_params(const float mouse_degree_per_pixel, const float speed_unit_sec);
 	
 
 	//In public attribute to make it easier

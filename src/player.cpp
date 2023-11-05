@@ -9,8 +9,11 @@ KeyMapping PLAYERS_MAPPING_QWERTY =
 
 Player::Player()
 {
+	p = vec3(0.0f);
+	v= vec3(0.0f);
+	a = vec3(0.0f);
 	m_radius = 1.0f;//meter
-	//m_mass = 1.0f;
+	m_mass = 1.0f;
 	m_ground_friction = 0.1f;
 	m_fluid_friction = 0.05f;
 	m_bounce_coef = 0.5f;
@@ -19,9 +22,16 @@ Player::Player()
 	m_rope_throw_intensity = 1.0f;
 	m_local_left =  vec3(-1.0f, 0.0f, 0.0f);
 	m_lock_mouse_mode = false;
+	m_w_v = glm::mat4(1.0f);
 	m_mouse_radians_per_pixel = 5.f;
 	m_up = glm::vec3(0.0f, 1.0f, 0.0f);
-	gravityStrength = 9.81f;
+	m_forward = glm::vec3(1.0f, 0.0f, 0.0f);
+	m_right = glm::vec3(0.0f, 0.0f, 1.0f);
+	m_theta = 0.0f;
+	m_phi = 0.0f;
+	m_mouse_coords = glm::vec2(0.0f);
+	m_speed_unit_sec = 1.0f;
+	gravityStrength = 0.f;//9.81
 }
 
 
@@ -86,17 +96,25 @@ void Player::poll_keys_mouse()//Incomplete function
 
 
 	if (glfwGetKey(ContextHelper::window, GLFW_KEY_W) == GLFW_PRESS)
-		v.x +=( m_speed_unit_sec * m_forward).x;
-		v.z += (m_speed_unit_sec * m_forward).z;
+		{
+			v.x += (m_speed_unit_sec * m_forward).x;
+			v.z += (m_speed_unit_sec * m_forward).z;
+		}
 	if (glfwGetKey(ContextHelper::window, GLFW_KEY_S) == GLFW_PRESS)
-		v.x -= (m_speed_unit_sec * m_forward).x;
-		v.z -= (m_speed_unit_sec * m_forward).z;
+		{
+			v.x -= (m_speed_unit_sec * m_forward).x;
+			v.z -= (m_speed_unit_sec * m_forward).z;
+		}
 	if (glfwGetKey(ContextHelper::window, GLFW_KEY_A) == GLFW_PRESS)
-		v.x -= (m_speed_unit_sec * m_right).x;
-		v.z -= (m_speed_unit_sec * m_right).z;
+		{
+			v.x -= (m_speed_unit_sec * m_right).x;
+			v.z -= (m_speed_unit_sec * m_right).z;
+		}
 	if (glfwGetKey(ContextHelper::window, GLFW_KEY_D) == GLFW_PRESS)
-		v.x += (m_speed_unit_sec * m_right).x;
-		v.z += (m_speed_unit_sec * m_right).z;
+		{
+			v.x += (m_speed_unit_sec * m_right).x;
+			v.z += (m_speed_unit_sec * m_right).z;
+		}
 
 	build_basis();
 }
@@ -106,7 +124,7 @@ void Player::Move()
 	a -= gravityStrength * m_up;
 	v += a * ContextHelper::time_frame_s;
 	p += v * ContextHelper::time_frame_s;
-	a -= a; // a = 0
+	a = vec3(0.0f); // a = 0
 
 }
 
@@ -132,13 +150,32 @@ void Player::build_basis()
 
 void Player::init()
 {
-
+	set_camera(vec3(-35.0f, 30.0f, -30.0f), 45.0f, -20.0f);
+	set_params(0.1f, 10.0f);
 }
 
 void Player::write_params_to_application_struct(ApplicationUboDataStructure& app_ubo)
 {
 	//app_ubo.player_color[m_id] = m_color;
 	//app_ubo.player_direction[m_id] = m_direction;
+}
+
+void Player::set_camera(const glm::vec3 position, float theta, float phi)
+{
+	p = position;
+	m_theta = glm::radians(theta);
+	m_phi = glm::radians(phi);
+	build_basis();
+
+	double mouse_x, mouse_y;
+	glfwGetCursorPos(ContextHelper::window, &mouse_x, &mouse_y);
+	m_mouse_coords = glm::vec2((float)mouse_x, (float)mouse_y);
+}
+
+void Player::set_params(const float mouse_degree_per_pixel, const float speed_unit_sec)
+{
+	m_mouse_radians_per_pixel = glm::radians(mouse_degree_per_pixel);
+	m_speed_unit_sec = speed_unit_sec;
 }
 
 void Player::gui()
