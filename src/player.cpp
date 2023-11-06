@@ -32,6 +32,7 @@ Player::Player()
 	m_mouse_coords = glm::vec2(0.0f);
 	m_speed_unit_sec = 1.0f;
 	gravityStrength = 0.f;//9.81
+	time_step = 1.f/120.f;
 }
 
 
@@ -97,23 +98,23 @@ void Player::poll_keys_mouse()//Incomplete function
 
 	if (glfwGetKey(ContextHelper::window, GLFW_KEY_W) == GLFW_PRESS)
 		{
-			v.x += (m_speed_unit_sec * m_forward).x * ContextHelper::time_frame_s;
-			v.z += (m_speed_unit_sec * m_forward).z * ContextHelper::time_frame_s;
+			v.x += (m_speed_unit_sec * m_forward).x * time_step;
+			v.z += (m_speed_unit_sec * m_forward).z * time_step;
 		}
 	if (glfwGetKey(ContextHelper::window, GLFW_KEY_S) == GLFW_PRESS)
 		{
-			v.x -= (m_speed_unit_sec * m_forward).x * ContextHelper::time_frame_s;
-			v.z -= (m_speed_unit_sec * m_forward).z * ContextHelper::time_frame_s;
+			v.x -= (m_speed_unit_sec * m_forward).x * time_step;
+			v.z -= (m_speed_unit_sec * m_forward).z * time_step;
 		}
 	if (glfwGetKey(ContextHelper::window, GLFW_KEY_A) == GLFW_PRESS)
 		{
-			v.x -= (m_speed_unit_sec * m_right).x * ContextHelper::time_frame_s;
-			v.z -= (m_speed_unit_sec * m_right).z * ContextHelper::time_frame_s;
+			v.x -= (m_speed_unit_sec * m_right).x * time_step;
+			v.z -= (m_speed_unit_sec * m_right).z * time_step;
 		}
 	if (glfwGetKey(ContextHelper::window, GLFW_KEY_D) == GLFW_PRESS)
 		{
-			v.x += (m_speed_unit_sec * m_right).x * ContextHelper::time_frame_s;
-			v.z += (m_speed_unit_sec * m_right).z * ContextHelper::time_frame_s;
+			v.x += (m_speed_unit_sec * m_right).x * time_step;
+			v.z += (m_speed_unit_sec * m_right).z * time_step;
 		}
 
 	build_basis();
@@ -122,9 +123,9 @@ void Player::poll_keys_mouse()//Incomplete function
 void Player::Move()
 {
 	a -= gravityStrength * m_up;
-	v += a * ContextHelper::time_frame_s - v * m_ground_friction * ContextHelper::time_frame_s;
-	p += v * ContextHelper::time_frame_s;
-	a = vec3(0.0f); // a = 0
+	v += a * time_step - v * m_ground_friction * time_step;
+	p += v * time_step;
+	a = vec3(0.0f);
 
 }
 
@@ -150,7 +151,7 @@ void Player::build_basis()
 
 void Player::init()
 {
-	set_camera(vec3(-35.0f, 30.0f, -30.0f), 45.0f, -20.0f);
+	set_camera(vec3(-35.0f, 30.0f, -30.0f), 0.f, 0.f);
 	set_params(0.1f, 10.0f);
 }
 

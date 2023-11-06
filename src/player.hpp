@@ -41,6 +41,9 @@ public:
 	vec3 m_local_left;//ws
 	float m_radius;//PLayer is a modeled as a sphere (for collision detextion, rope throw offset)
 	glm::mat4 m_w_v;//world view matrix
+	float time_step;
+	float m_theta;
+	float m_phi;
 
 
 private:
@@ -54,8 +57,7 @@ private:
 	float m_rope_throw_intensity;// how far a rope is launched, probably initial acceleration !
 	bool m_lock_mouse_mode;
 	vec2 m_mouse_coords;
-	float m_theta;
-	float m_phi;
+
 	float m_mouse_radians_per_pixel;
 	float m_speed_unit_sec;
 	vec3 m_forward;
