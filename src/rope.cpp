@@ -12,7 +12,7 @@ Rope::Rope(std::uint32_t control_point_count, Player& player) : m_player(player)
 
 	for (int i = 0; i < m_control_point_count; i++)
 	{
-		p[i] = vec3(i / 10.0f, i / 10.0f, i * i / 100.0f);//to change
+		p[i] = m_player.p + vec3(i / 100.0f, i / 100.0f, i * i / 10000.0f);//to change
 		v[i] = vec3(0.0f);
 		a[i] = vec3(0.0f);
 	}
@@ -75,7 +75,7 @@ void Rope::compute_rope_physics(float delta_time, float gravity){
 	vec3 former_force_direction = normalize(p[m_control_point_count-2]-p[m_control_point_count-1]);
 	if(is_tail_bound_to_player){
 		m_player.AddAcceleration(segment_k * former_segment_delta * former_force_direction / (segment_mass + m_player.m_mass));
-		p[m_control_point_count - 1];
+		p[m_control_point_count - 1] = m_player.p;
 		
 	}
 	else{

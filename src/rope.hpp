@@ -24,10 +24,12 @@ public:
 	vec3* v;//velocity
 	vec3* a;//acceleration
 	Player& m_player;
-private:
 	bool is_head_bound_to_platform;
 	bool is_tail_bound_to_player;
 	bool is_left_hand;
+
+private:
+	
 	float segment_length; //longueur d'un segment 
 	float segment_mass;   //masse d'un noeud entre deux segment
 	float segment_k;		 //constante de raideur de chaque segment

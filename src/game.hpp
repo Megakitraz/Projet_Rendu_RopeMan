@@ -30,6 +30,17 @@ public:
 	float m_gravity_amplitude;//in direction -y
 	float m_delta_t_s;//simulation time-step in second
 	Player m_player;
+	int last_rope_thrown;
+	void throw_rope();
+
+	//Rope manager
+	std::uint32_t m_rope_bank_size;//number of ropes managed
+	std::uint32_t m_control_point_per_rope_count;
+	std::vector<Rope> m_rope_bank;
+	//GPU rope ressources
+		GPUBuffer m_rope_bank_pos_VBO;//VBO storing postion of all ropes control points
+		GPUBuffer m_rope_bank_tan_VBO;//VBO storing tangent of all ropes control points
+		std::uint32_t m_size_of_rope;// = m_control_point_per_rope_count * sizeof(vec4)
 
 private:
 
@@ -46,14 +57,7 @@ private:
 	VertexArrayObject m_vao_ropes;
 	Cubemap m_tex_environment;
 
-	//Rope manager
-	std::uint32_t m_rope_bank_size;//number of ropes managed
-	std::uint32_t m_control_point_per_rope_count;
-	std::vector<Rope> m_rope_bank;
-		//GPU rope ressources
-		GPUBuffer m_rope_bank_pos_VBO;//VBO storing postion of all ropes control points
-		GPUBuffer m_rope_bank_tan_VBO;//VBO storing tangent of all ropes control points
-		std::uint32_t m_size_of_rope;// = m_control_point_per_rope_count * sizeof(vec4)
+	
 
 	float m_lava_altitude;//in Y dimension
 	float m_lava_speed;

@@ -44,6 +44,11 @@ public:
 	float time_step;
 	float m_theta;
 	float m_phi;
+	vec3 m_forward;
+	vec3 m_right;
+	vec3 m_up;
+
+	float m_rope_throw_intensity;// how far a rope is launched, probably initial acceleration !
 
 
 private:
@@ -54,15 +59,13 @@ private:
 	float m_bounce_coef;//When hitting a platform, "wall" component of speed is reversed with that factor 
 	float m_jump_intensity;// have to be decided : jump only from ground? acceleration / velocity based ?
 	float m_input_intensity;// strength of keyboard input
-	float m_rope_throw_intensity;// how far a rope is launched, probably initial acceleration !
+	
 	bool m_lock_mouse_mode;
 	vec2 m_mouse_coords;
 
 	float m_mouse_radians_per_pixel;
 	float m_speed_unit_sec;
-	vec3 m_forward;
-	vec3 m_right;
-	vec3 m_up;
+	
 
 	
 
