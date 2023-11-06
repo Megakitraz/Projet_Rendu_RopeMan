@@ -19,6 +19,8 @@ Rope::Rope(std::uint32_t control_point_count, Player& player) : m_player(player)
 	is_head_bound_to_platform = false;
 	is_tail_bound_to_player = false;
 
+	segment_k = 0.0f;
+
 	compute_p_shading();
 	compute_tangents();
 }
