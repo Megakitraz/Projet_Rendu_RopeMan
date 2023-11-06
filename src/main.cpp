@@ -70,8 +70,10 @@ int main(int argc, char* argv[]) {
 		}
 		proj.set_viewport_resolution(ContextHelper::resolution);
 
+		glfwSetInputMode(ContextHelper::window, GLFW_STICKY_MOUSE_BUTTONS, GLFW_FALSE);
 		if (glfwGetMouseButton(ContextHelper::window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
 		{
+			
 			game.throw_rope();
 		}
 
@@ -118,7 +120,7 @@ int main(int argc, char* argv[]) {
 			ImGui::Text(("Player position: " + std::to_string(player.p.x) + " " + std::to_string(player.p.y) + " " + std::to_string(player.p.z) + " ").c_str());
 			ImGui::Text(("Player speed: " + std::to_string(player.v.x) + " " + std::to_string(player.v.y) + " " + std::to_string(player.v.z) + " ").c_str());
 			ImGui::Text(("Player acc: " + std::to_string(player.a.x) + " " + std::to_string(player.a.y) + " " + std::to_string(player.a.z) + " ").c_str());
-			ImGui::Text(("Rope Position: " + std::to_string(game.m_rope_bank[0].p[0].x) + " " + std::to_string(game.m_rope_bank[0].p[0].y) + " " + std::to_string(game.m_rope_bank[0].p[0].z) + " ").c_str());
+			ImGui::Text(("Rope Position: " + std::to_string(game.m_rope_bank[0].p[0].x) + " " + std::to_string(game.m_rope_bank[0].p[0].y) + " " + std::to_string(game.last_rope_thrown) + " ").c_str());
 			ImGui::TreePop();
 		}
 		game.gui(app_ubo_data);

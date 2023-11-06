@@ -20,6 +20,7 @@ Rope::Rope(std::uint32_t control_point_count, Player& player) : m_player(player)
 	is_tail_bound_to_player = false;
 
 	compute_p_shading();
+	compute_tangents();
 }
 
 
@@ -44,8 +45,14 @@ void Rope::compute_p_shading()
 	}
 }
 
-void Rope::compute_tangents(){
-
+void Rope::compute_tangents()
+{
+	(vec3)t_shading[0] = normalize(p_shading[1] - p_shading[0]);
+	for (int i = 1; i < m_control_point_count-1; i++)
+	{
+		(vec3)t_shading[i] = normalize(p_shading[i+1] - p_shading[i-1]);
+	}
+	(vec3)t_shading[m_control_point_count - 1] = normalize(p_shading[m_control_point_count - 1] - p_shading[m_control_point_count - 2]);
 }
 
 void Rope::compute_rope_physics(float delta_time, float gravity){
@@ -82,7 +89,8 @@ void Rope::compute_rope_physics(float delta_time, float gravity){
 		a[m_control_point_count-1] = gravity*vec3(0,-1, 0) 
 		+ segment_k*former_segment_delta*former_force_direction/(segment_mass);
 	}
-
+	compute_p_shading();
+	compute_tangents();
 }
 
 /*
