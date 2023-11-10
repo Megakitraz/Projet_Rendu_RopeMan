@@ -48,6 +48,10 @@ public:
 	vec3 m_right;
 	vec3 m_up;
 
+	int speed;
+
+	
+
 	float m_rope_throw_intensity;// how far a rope is launched, probably initial acceleration !
 
 

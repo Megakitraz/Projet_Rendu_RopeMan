@@ -1,4 +1,5 @@
-#include "player.hpp"
+#include "player.hpp"*
+#include "game.hpp"
 
 KeyMapping PLAYERS_MAPPING_QWERTY = 
 	{GLFW_KEY_LEFT,GLFW_KEY_RIGHT,GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_SPACE};
@@ -33,6 +34,7 @@ Player::Player()
 	m_speed_unit_sec = 1.0f;
 	gravityStrength = 0.f;//9.81
 	time_step = 1.f/120.f;
+	speed = 100;
 }
 
 
@@ -95,7 +97,6 @@ void Player::poll_keys_mouse()//Incomplete function
 	m_theta += delta_mouse.x * m_mouse_radians_per_pixel;
 	m_phi = glm::clamp(m_phi  - delta_mouse.y * m_mouse_radians_per_pixel, -3.13f * 0.5f, 3.13f * 0.5f);
 
-	int speed = 100;
 	if (glfwGetKey(ContextHelper::window, GLFW_KEY_W) == GLFW_PRESS)
 		{
 			p.x -= (m_speed_unit_sec * m_forward).x * time_step * speed;
@@ -184,6 +185,7 @@ void Player::gui()
 {
 	if (ImGui::TreeNode("Player parameters"))
 	{
+		//ImGui::SliderInt("Player Speed", &speed, 1, 200);
 		ImGui::SliderFloat("Collision radius", &m_radius, 0.5f, 2.0f);
 		ImGui::SliderFloat("Mass", &m_mass, 0.5f, 2.0f);
 		ImGui::SliderFloat("Ground friction", &m_ground_friction, 0.0f, 1.0f);
