@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
 	Game game;
 	game.load_shaders(FOLDER_ROOT);
 
-
+	float last_State = GLFW_PRESS;
 
 
 	//UBO init
@@ -71,11 +71,12 @@ int main(int argc, char* argv[]) {
 		proj.set_viewport_resolution(ContextHelper::resolution);
 
 		glfwSetInputMode(ContextHelper::window, GLFW_STICKY_MOUSE_BUTTONS, GLFW_FALSE);
-		if (glfwGetMouseButton(ContextHelper::window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
+		if (glfwGetMouseButton(ContextHelper::window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS && last_State != GLFW_PRESS)
 		{
 			
 			game.throw_rope();
 		}
+		last_State = glfwGetMouseButton(ContextHelper::window, GLFW_MOUSE_BUTTON_RIGHT);
 
 
 		game.ropes_physics();
