@@ -52,7 +52,7 @@ ivec3 cell_id_3d = ivec3(floor(pos / platform_cell_length.xyz));//this per-cell 
 //cell_id_3d = ivec3(3,3,3);
 
 
-vec3 bounding_box_cell_half_length = platform_cell_length.xyz*0.5 + platform_cell_offset.xyz;
+vec3 bounding_box_cell_half_length = platform_cell_length.xyz*0.5 + platform_cell_offset.xyz; // red box
 vec3 bounding_box_cell_center = (cell_id_3d+0.5)*platform_cell_length.xyz;
 
 //This is the red box (sketch on discord)
@@ -61,7 +61,7 @@ float sdf_bounding_box = sdf_box(pos,bounding_box_cell_center,bounding_box_cell_
 //green platform, must be inside the green box
 //Here, centered in middle of cell, to be randomized in length, width, position, 
 //but remaining in the green box  = orange box - platform_cell_offset.xyz (all sides)
-vec3 green_box = bounding_box_cell_half_length - platform_cell_offset.xyz;
+vec3 green_box = platform_cell_length.xyz*0.5 - platform_cell_offset.xyz;
 
 
 
