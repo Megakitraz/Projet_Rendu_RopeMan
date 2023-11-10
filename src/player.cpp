@@ -95,26 +95,26 @@ void Player::poll_keys_mouse()//Incomplete function
 	m_theta += delta_mouse.x * m_mouse_radians_per_pixel;
 	m_phi = glm::clamp(m_phi  - delta_mouse.y * m_mouse_radians_per_pixel, -3.13f * 0.5f, 3.13f * 0.5f);
 
-
+	int speed = 100;
 	if (glfwGetKey(ContextHelper::window, GLFW_KEY_W) == GLFW_PRESS)
 		{
-			v.x -= (m_speed_unit_sec * m_forward).x * time_step;
-			v.z -= (m_speed_unit_sec * m_forward).z * time_step;
+			p.x -= (m_speed_unit_sec * m_forward).x * time_step * speed;
+			p.z -= (m_speed_unit_sec * m_forward).z * time_step * speed;
 		}
 	if (glfwGetKey(ContextHelper::window, GLFW_KEY_S) == GLFW_PRESS)
 		{
-			v.x += (m_speed_unit_sec * m_forward).x * time_step;
-			v.z += (m_speed_unit_sec * m_forward).z * time_step;
+			p.x += (m_speed_unit_sec * m_forward).x * time_step * speed;
+			p.z += (m_speed_unit_sec * m_forward).z * time_step * speed;
 		}
 	if (glfwGetKey(ContextHelper::window, GLFW_KEY_A) == GLFW_PRESS)
 		{
-			v.x += (m_speed_unit_sec * m_right).x * time_step;
-			v.z += (m_speed_unit_sec * m_right).z * time_step;
+			p.x += (m_speed_unit_sec * m_right).x * time_step * speed;
+			p.z += (m_speed_unit_sec * m_right).z * time_step * speed;
 		}
 	if (glfwGetKey(ContextHelper::window, GLFW_KEY_D) == GLFW_PRESS)
 		{
-			v.x -= (m_speed_unit_sec * m_right).x * time_step;
-			v.z -= (m_speed_unit_sec * m_right).z * time_step;
+			p.x -= (m_speed_unit_sec * m_right).x * time_step * speed;
+			p.z -= (m_speed_unit_sec * m_right).z * time_step * speed;
 		}
 
 	build_basis();
