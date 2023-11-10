@@ -98,23 +98,23 @@ void Player::poll_keys_mouse()//Incomplete function
 
 	if (glfwGetKey(ContextHelper::window, GLFW_KEY_W) == GLFW_PRESS)
 		{
-			p.x -= (m_speed_unit_sec * m_forward).x * time_step;
-			p.z -= (m_speed_unit_sec * m_forward).z * time_step;
+			v.x -= (m_speed_unit_sec * m_forward).x * time_step;
+			v.z -= (m_speed_unit_sec * m_forward).z * time_step;
 		}
 	if (glfwGetKey(ContextHelper::window, GLFW_KEY_S) == GLFW_PRESS)
 		{
-			p.x += (m_speed_unit_sec * m_forward).x * time_step;
-			p.z += (m_speed_unit_sec * m_forward).z * time_step;
+			v.x += (m_speed_unit_sec * m_forward).x * time_step;
+			v.z += (m_speed_unit_sec * m_forward).z * time_step;
 		}
 	if (glfwGetKey(ContextHelper::window, GLFW_KEY_A) == GLFW_PRESS)
 		{
-			p.x += (m_speed_unit_sec * m_right).x * time_step;
-			p.z += (m_speed_unit_sec * m_right).z * time_step;
+			v.x += (m_speed_unit_sec * m_right).x * time_step;
+			v.z += (m_speed_unit_sec * m_right).z * time_step;
 		}
 	if (glfwGetKey(ContextHelper::window, GLFW_KEY_D) == GLFW_PRESS)
 		{
-			p.x -= (m_speed_unit_sec * m_right).x * time_step;
-			p.z -= (m_speed_unit_sec * m_right).z * time_step;
+			v.x -= (m_speed_unit_sec * m_right).x * time_step;
+			v.z -= (m_speed_unit_sec * m_right).z * time_step;
 		}
 
 	build_basis();
@@ -126,6 +126,7 @@ void Player::Move()
 	v += a * time_step - v * m_ground_friction * time_step;
 	p += v * time_step;
 	a = vec3(0.0f);
+	build_basis();
 
 }
 
