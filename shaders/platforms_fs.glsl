@@ -61,10 +61,12 @@ float sdf_bounding_box = sdf_box(pos,bounding_box_cell_center,bounding_box_cell_
 //green platform, must be inside the green box
 //Here, centered in middle of cell, to be randomized in length, width, position, 
 //but remaining in the green box  = orange box - platform_cell_offset.xyz (all sides)
+vec3 green_box = bounding_box_cell_half_length - platform_cell_offset.xyz;
+
 
 
 //For random calls in [0,1] use hash14 or hash34 (for 3 numbers), and increment the forth coord
-float sdf_platform = sdf_box(pos,bounding_box_cell_center,platform_length.ywy*0.5,3.0);
+float sdf_platform = sdf_box(pos,bounding_box_cell_center + (hash34(vec4(cell_id_3d, 0.0))*2-1)*green_box,platform_length.xyz*0.5,3.0);
 
 //hash 14 called with a seed made of the cell 3d ID + a "call ID" = 0.0 (to be incremented)
 if (hash14(vec4(cell_id_3d,0.0))<platform_cell_length.w)

@@ -19,7 +19,7 @@ Game::Game()
 
 	m_platform_cell_length = vec4(200.0f, 50.0f, 200.0f,0.2f);
 	m_platform_cell_offset = vec4(10.0f,10.0f, 10.0f, 0.2f);
-	m_platform_length = vec4(10.0f, 40.0f, 5.0f, 20.0f);
+	m_platform_length = vec4(40.0f, 20.0f, 40.0f, 20.0f);
 	init_game();
 }
 
