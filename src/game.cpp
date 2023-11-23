@@ -109,7 +109,7 @@ void Game::throw_rope()
 		m_rope_bank[last_rope_thrown].a[i] = vec3(0.0f);
 	}
 	m_rope_bank[last_rope_thrown].v[0] = m_player.m_forward * m_player.m_rope_throw_intensity;
-	m_rope_bank[last_rope_thrown].is_head_bound_to_platform = true;
+	m_rope_bank[last_rope_thrown].is_head_bound_to_platform = false;
 	m_rope_bank[last_rope_thrown].is_tail_bound_to_player = true;
 	m_rope_bank[last_rope_thrown].is_left_hand = false;
 	
