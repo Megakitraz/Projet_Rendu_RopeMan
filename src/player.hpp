@@ -50,7 +50,16 @@ public:
 
 	int speed;
 
-	
+	vec3 CollisionResult(vec3 origin, vec3 direction, float dist);
+
+	float sdf_box(vec3 pos, vec3 center, vec3 half_size, float round_radius);
+	float hash14(vec4 p4);
+	vec3 hash34(vec4 p4);
+	float platforms_sdf(vec3 pos);
+
+	vec4 platform_cell_length;
+	vec4 platform_cell_offset;
+	vec3 platform_length;
 
 	float m_rope_throw_intensity;// how far a rope is launched, probably initial acceleration !
 
